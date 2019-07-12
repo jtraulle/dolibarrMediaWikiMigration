@@ -47,11 +47,15 @@ When interlangage links are changed on English pages, updated links are reflecte
 ```
 * If the extension finds the block, it deduce that an English page has been changed.
 * Extracting the different linked translated pages, PolyglotBot build the new block below for each translation
+```
 <!-- BEGIN interlang links -->
 .*
 <!-- END interlang links -->
+```
 * The extension then compare for each translated page if the block has been changed on the source page and needs to be updated.
 * If this is the case, the block is updated.
 
-NB : Interlangage links on each translated page are updated using the Job queue mecanism : refer to https://www.mediawiki.org/wiki/Manual:Job_queue/For_developers
+NB : English pages interlang links comment starts with <pre><!-- BEGIN <strong>origin</strong> interlang</pre> whereas translated page starts with <pre><!-- BEGIN interlang</pre> This allow PolyglotBot to distinguish English origin content from translated content.
+
+NB : Interlangage links on each translated page are updated using MediaWiki Job queue mecanism to avoid adding burden to page edits : refer to https://www.mediawiki.org/wiki/Manual:Job_queue/For_developers for more info.
 ```
