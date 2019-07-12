@@ -15,7 +15,7 @@ use MediaWiki\Revision\SlotRecord;
 require_once __DIR__ . '/Maintenance.php';
 
 
-class HelloWorld extends Maintenance {
+class MigrateFromMetaKeywordsTagToAddHTMLMetaAndTitle extends Maintenance {
         public function execute() {
                 global $wgUser;
 
@@ -65,6 +65,6 @@ class HelloWorld extends Maintenance {
         }
 }
 
-$maintClass = HelloWorld::class;
+$maintClass = MigrateFromMetaKeywordsTagToAddHTMLMetaAndTitle::class;
 
 require_once RUN_MAINTENANCE_IF_MAIN;
