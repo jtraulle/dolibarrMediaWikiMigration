@@ -13,7 +13,7 @@ This repo contain
 #### maintenance/migrateFromMetaKeywordsTagToAddHTMLMetaAndTitle.php
 
 This script search for pages that includes pattern like `<keywords content` and replace with `<seo metak`.    
-This allow to migrate from old **MetaKeywordsTag** extension to new **AddHTMLMetaAndTitle** extension.
+This allow to migrate from old **MetaKeywordsTag** extension to new **AddHTMLMetaAndTitle** extension.    
 Edit are conducted by a bot user named TaggerArtistBot and marked as minor.
 
 #### maintenance/migrateFromMultiLanguageManagerToInterlanguagesPageLinks.php
@@ -34,6 +34,7 @@ This script use data in the **langlinks** MediaWiki table (interlanguage links) 
 
 This extension keep the interlangage links from English pages in sync with the translated pages.    
 When interlangage links are changed on English pages, updated links are reflected on the translated pages.   
+Edit are conducted by a bot user named PolyglotBot and marked as minor.
 
 #### How does it work ?
 
