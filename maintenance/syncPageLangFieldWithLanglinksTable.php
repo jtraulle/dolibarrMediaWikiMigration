@@ -26,14 +26,18 @@ class SyncPageLangFieldWithLanglinksTable extends Maintenance {
         $arrayOutput = json_decode(implode($output, PHP_EOL), TRUE);
 
         if (count($arrayOutput) !== 0) {
+            $apiInstance = new ApiMain();
+            $wgUser = User::newSystemUser( 'PolyglotBot', [ 'steal' => true ] );
+            $apiInstance->getContext()->setUser( $wgUser );
             foreach ($arrayOutput as $record) {
-                var_dump(SpecialPageLanguage::changePageLanguage(
-                    new ApiMain(),
+                SpecialPageLanguage::changePageLanguage(
+                    $apiInstance,
                     Title::newFromText($record['ll_title']),
                     $record['ll_lang'],
                     $params['reason'] ?? '',
                     $params['tags'] ?: []
-                ));
+                );
+                $this->output( "Page language switched from default language (en) to " . $record['ll_lang'] . "for page \"" . $record['ll_title'] . "\". \n" );
             }
 
             $this->output( "Done. \n" );
