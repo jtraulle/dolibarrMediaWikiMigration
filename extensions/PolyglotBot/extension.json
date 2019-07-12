@@ -1,0 +1,20 @@
+{
+  "name": "PolyglotBot",
+  "author": "Jean Traullé",
+  "url": "https://jean.traulle.net",
+  "description": "This extension watch English page edits to reflect interlang links on translated pages.",
+  "version": "1.0",
+  "license-name": "MIT",
+  "type": "other",
+  "AutoloadClasses": {
+    "PolyglotBotHooks": "includes/PolyglotBotHooks.php",
+    "UpdateTranslatedPageInterlangLinksJob": "includes/UpdateTranslatedPageInterlangLinksJob.php"
+  },
+  "Hooks": {
+    "PageContentSaveComplete": "PolyglotBotHooks::onPageContentSaveComplete"
+  },
+  "JobClasses": {
+    "updateTranslatedPageInterlangLinks": "UpdateTranslatedPageInterlangLinksJob"
+  },
+  "manifest_version": 1
+}
