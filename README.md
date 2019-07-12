@@ -58,4 +58,3 @@ When interlangage links are changed on English pages, updated links are reflecte
 NB : English pages interlang links comment starts with <pre><!-- BEGIN <strong>origin</strong> interlang</pre> whereas translated page starts with <pre><!-- BEGIN interlang</pre> This allow PolyglotBot to distinguish English origin content from translated content.
 
 NB : Interlangage links on each translated page are updated using MediaWiki Job queue mecanism to avoid adding burden to page edits : refer to https://www.mediawiki.org/wiki/Manual:Job_queue/For_developers for more info.
-```
