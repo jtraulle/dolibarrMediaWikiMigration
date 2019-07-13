@@ -48,6 +48,11 @@ class PolyglotBotHooks
         }
         $spTitle = $wikiPage->getTitle()->getDBkey();
 
+        // If current page is not a standard content page, we abort the process.
+        if ($wikiPage->getTitle()->getNamespace() !== NS_MAIN) {
+            return true;
+        }
+
         preg_match("/<!-- BEGIN origin interlang links -->.*<!-- END interlang links -->/sm", $content->getText(), $matches);
 
         if (count($matches) !== 0) {
@@ -68,7 +73,7 @@ class PolyglotBotHooks
                 $jobParams = [ 'interlangLinks' => $interlangLinks, 'sourcePageTitle' => $spTitle ];
                 $title = Title::newFromText( $dpTitle );
                 $job = new UpdateTranslatedPageInterlangLinksJob( $title, $jobParams );
-                JobQueueGroup::singleton()->push( $job );
+                JobQueueGroup::singleton()->lazyPush( $job );
             }
         }
 
