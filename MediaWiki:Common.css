@@ -1,0 +1,9 @@
+/* CSS placed here will be applied to all skins */
+
+/* We disable the talk tab */
+#ca-talk { display:none; }
+
+/* The insertInterlangLinks tool should be displayed only in source mode */
+.ve-init-target-visual .oo-ui-tool-name-insertInterlangLinks {
+	display: none;
+}
