@@ -52,9 +52,15 @@ function makeInsertInterlangLinksTool() {
 		ve.ui.InsertInterlangLinksTool.super.apply( this, arguments );
 	};
 	OO.inheritClass( ve.ui.InsertInterlangLinksTool, ve.ui.Tool );
+	
+	var title = "Interlanguage links template";
+	if (OO.ui.getUserLanguages()[0] === 'fr') {
+		title = "Modèle liens interlangues";
+	}
+
 	ve.ui.InsertInterlangLinksTool.static.name = 'insertInterlangLinks';
 	ve.ui.InsertInterlangLinksTool.static.group = 'insert';
-	ve.ui.InsertInterlangLinksTool.static.title = 'Interlang links template';
+	ve.ui.InsertInterlangLinksTool.static.title = title;
 	ve.ui.InsertInterlangLinksTool.static.icon = 'textLanguage';
 	ve.ui.InsertInterlangLinksTool.static.commandName = 'insertInterlangLinks';
 	ve.ui.toolFactory.register( ve.ui.InsertInterlangLinksTool );
