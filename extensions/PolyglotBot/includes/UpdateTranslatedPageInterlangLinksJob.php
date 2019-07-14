@@ -27,8 +27,17 @@ class UpdateTranslatedPageInterlangLinksJob extends Job
 
         preg_match("/<!-- BEGIN interlang links -->.*<!-- END interlang links -->/sm", $text, $matches);
 
-        if(count($matches) !== 0 && $matches[0] !== $interlangLinks) {
-            $updatedPageText = str_replace($matches[0], $interlangLinks, $text);
+        if($matches[0] !== $interlangLinks) {
+
+            if (count($matches) !== 0) {
+                $updatedPageText = str_replace($matches[0], $interlangLinks, $text);
+                $summary = "Updating interlang links (links to translated versions of this page in other languages) ";
+            } else {
+                $updatedPageText = $interlangLinks . PHP_EOL . PHP_EOL . $text;
+                $summary = "Adding interlang links (links to translated versions of this page in other languages) ";
+            }
+
+            $summary .= "triggered by origin English page \"" . $sourcePageTitle . "\" update.";
 
             $wgUser = User::newSystemUser( 'PolyglotBot', [ 'steal' => true ] );
             $content = ContentHandler::makeContent( $updatedPageText, $this->title );
@@ -37,8 +46,6 @@ class UpdateTranslatedPageInterlangLinksJob extends Job
             $updater = $page->newPageUpdater( $wgUser );
 
             $slot = SlotRecord::MAIN;
-            $summary = "Update interlang links (links to translated versions of this page in other languages) ";
-            $summary .= "triggered by origin English page \"" . $sourcePageTitle . "\" update.";
 
             $minor = TRUE;
             $bot = TRUE;
