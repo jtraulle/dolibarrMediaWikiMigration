@@ -1,5 +1,8 @@
 /* Any JavaScript here will be loaded for all users on every page load. */
 
+/**
+ * Add custom tool to insert interlanguage links on WikiText editor toolbar (2010)
+ **/
 var customizeToolbar = function () {
 	$( '#wpTextbox1' ).wikiEditor( 'addToToolbar', {
 	'section': 'advanced',
@@ -8,7 +11,7 @@ var customizeToolbar = function () {
 		'interlang': {
 			label: 'Insert interlang template.', // or use labelMsg for a localized label, see above
 			type: 'button',
-			icon: 'textLanguage',
+			icon: '/load.php?modules=oojs-ui.styles.icons-editing-styling&image=textLanguage',
 			action: {
 				type: 'encapsulate',
 				options: {
@@ -20,10 +23,24 @@ var customizeToolbar = function () {
 				}
 			}
 		}
-	}
-} );
+	}});
 };
 
+/* Check if view is in edit mode and that the required modules are available. Then, customize the toolbar … */
+if ( [ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 ) {
+	mw.loader.using( 'user.options' ).then( function () {
+		// This can be the string "0" if the user disabled the preference ([[phab:T54542#555387]])
+		if ( mw.user.options.get( 'usebetatoolbar' ) == 1 ) {
+			$.when(
+				mw.loader.using( 'ext.wikiEditor' ), $.ready
+			).then( customizeToolbar );
+		}
+	} );
+}
+
+/**
+ * Add custom tool to insert interlanguage links on WikiText editor (2017)
+ **/
 function makeInsertInterlangLinksTool() {
 	ve.ui.commandRegistry.register( new ve.ui.Command(
 		// Command name
